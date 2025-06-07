@@ -3,8 +3,8 @@ from stable_baselines3 import PPO
 
 env = gym.make("LunarLander-v2")
 model = PPO("MlpPolicy", env, verbose=1)
-model.learn(total_timesteps=100_000)
-model.save("ppo_lunarlander")
+model.learn(total_timesteps=100_000, progress_bar=True)
+model.load("ppo_lunarlander")
 
 obs = env.reset()
 done = False
