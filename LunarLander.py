@@ -1,24 +1,15 @@
-import gymnasium as gym
+import gym
 from stable_baselines3 import PPO
 
-# Create the LunarLander-v3 environment
-env = gym.make("LunarLander-v3", render_mode = "human")
-
-# Create the PPO model with a multilayer perceptron policy
+env = gym.make("LunarLander-v2")
 model = PPO("MlpPolicy", env, verbose=1)
-
-# Train the model for 100,000 timesteps
-model.learn(total_timesteps=100_000, progress_bar=True)
-
-# Save the model
+model.learn(total_timesteps=100_000)
 model.save("ppo_lunarlander")
 
-# Test the trained agent
-obs, info = env.reset()
+obs = env.reset()
 done = False
 while not done:
-    action, _states = model.predict(obs, deterministic=True)
-    obs, reward, terminated, truncated, info = env.step(action)
-    done = terminated or truncated
+    action, _ = model.predict(obs, deterministic=True)
+    obs, reward, done, info = env.step(action)
     env.render()
 env.close()
