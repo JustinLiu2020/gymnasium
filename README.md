@@ -1,2 +1,4 @@
 # gymnasium
-for gym ais
+For gym AIs.
+
+1. Lunar lander :)
